@@ -1330,6 +1330,7 @@ qboolean M_Responder (event_t* ev)
 		G_ScreenShot ();
 		return true;
 	}
+*/
 
 	// F-Keys
 	if (!::g->menuactive)
@@ -1349,6 +1350,7 @@ qboolean M_Responder (event_t* ev)
 			S_StartSound(NULL,sfx_stnmov);
 			return true;
 
+/*
 		case KEY_F1:            // Help key
 			M_StartControlPanel ();
 
@@ -1360,7 +1362,7 @@ qboolean M_Responder (event_t* ev)
 			::g->itemOn = 0;
 			S_StartSound(NULL,sfx_swtchn);
 			return true;
-
+*/
 		case KEY_F2:            // Save
 			M_StartControlPanel();
 			S_StartSound(NULL,sfx_swtchn);
@@ -1419,7 +1421,6 @@ qboolean M_Responder (event_t* ev)
 			return true;
 
 	}
-*/
 
 	// Pop-up menu?
 	if (!::g->menuactive)
