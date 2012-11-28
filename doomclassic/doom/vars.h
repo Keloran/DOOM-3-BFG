@@ -218,7 +218,7 @@ qboolean         singledemo;            	// quit after playing a demo from cmdli
 qboolean         precache ;
 wbstartstruct_t wminfo;               	// parms for world map / intermission 
 short		consistancy[MAXPLAYERS][BACKUPTICS]; 
-colormapindex_t*		savebuffer;
+byte*		savebuffer;
 int			savebufferSize;
 int             key_right;
 int		key_left;
@@ -479,7 +479,7 @@ fixed_t		swingy;
 fixed_t		bulletslope;
 // p_pspr.vars end // 
 //  p_saveg.vars begin // 
-colormapindex_t*		save_p;
+byte*		save_p;
 // p_saveg.vars end // 
 //  p_setup.vars begin // 
 int		numvertexes;

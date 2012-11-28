@@ -197,8 +197,8 @@ void R_DrawColumnLow ( lighttable_t * dc_colormap,
 					   byte * dc_source ) 
 { 
 	int			count; 
-	byte*		dest; 
-	byte*		dest2;
+	colormapindex_t*		dest; 
+	colormapindex_t*		dest2;
 	fixed_t		frac;
 	fixed_t		fracstep;	 
 
@@ -621,7 +621,7 @@ void R_DrawSpanLow ( fixed_t xfrac,
 				  lighttable_t * ds_colormap,
 				  byte * ds_source ) 
 {
-	byte*		dest; 
+	colormapindex_t*		dest; 
 	int			count;
 	int			spot; 
 
@@ -792,7 +792,7 @@ R_VideoErase
 	//  is not optiomal, e.g. byte by byte on
 	//  a 32bit CPU, as GNU GCC/Linux libc did
 	//  at one point.
-	memcpy(::g->screens[0]+ofs, ::g->screens[1]+ofs, count); 
+	memcpy(::g->screens[0]+ofs, ::g->screens[1]+ofs, count * sizeof(colormapindex_t)); 
 }
 
 

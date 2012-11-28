@@ -315,7 +315,7 @@ typedef byte	lighttable_t;
 
 
 // ADD(jsd): colormapindex_t represents a index into the final palette (which can be > 256 colors for 32bpp lightmapping)
-typedef byte    colormapindex_t;
+typedef unsigned int    colormapindex_t;
 
 //
 // ?

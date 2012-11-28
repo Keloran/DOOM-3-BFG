@@ -352,6 +352,7 @@ void F_TextWrite (void)
 	
     for (y=0 ; y<SCREENHEIGHT ; y++)
     {
+#if 0
         for (x=0 ; x<SCREENWIDTH/64 ; x++)
         {
 	        memcpy (dest, src+((y&63)<<6), 64);
@@ -362,6 +363,12 @@ void F_TextWrite (void)
 	        memcpy (dest, src+((y&63)<<6), SCREENWIDTH&63);
 	        dest += (SCREENWIDTH&63);
         }
+#else
+        for (x=0 ; x<SCREENWIDTH; x++)
+        {
+	        *dest++ = (src+((y&63)<<6))[x];
+        }
+#endif
     }
 
     V_MarkRect (0, 0, SCREENWIDTH, SCREENHEIGHT);
