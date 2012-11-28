@@ -732,6 +732,7 @@ void idCommonLocal::RunDoomClassicFrame() {
 				byte green = (paletteColor & 0x00FF0000) >> 16;
 				byte blue = (paletteColor & 0x0000FF00) >> 8;
 
+                // Darken the color to black according to light level (0-31) where 0 is full bright and 31 is full dark:
                 red = (red * (256 - 8 * darkening)) / 256;
                 green = (green * (256 - 8 * darkening)) / 256;
                 blue = (blue * (256 - 8 * darkening)) / 256;

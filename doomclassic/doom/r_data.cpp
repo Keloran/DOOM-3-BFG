@@ -579,6 +579,7 @@ void R_InitColormaps (void)
     ::g->colormaps = (byte *)( ((int)::g->colormaps + 255)&~0xff); 
     W_ReadLump (lump,::g->colormaps);
 #else
+    // NOTE(jsd): It's rather pointless to allocate memory for this identity lookup table, but it's easy.
     ::g->colormaps = (lighttable_t*)DoomLib::Z_Malloc (256 * NUMCOLORMAPS * sizeof(lighttable_t), PU_STATIC, 0);
     for (int c = 0; c < NUMCOLORMAPS; ++c)
         for (int i = 0; i < 256; ++i)
