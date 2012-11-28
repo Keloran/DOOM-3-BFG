@@ -144,7 +144,7 @@ void I_FinishUpdate (void)
 //
 // I_ReadScreen
 //
-void I_ReadScreen (byte* scr)
+void I_ReadScreen (colormapindex_t* scr)
 {
     memcpy(scr, ::g->screens[0], SCREENWIDTH*SCREENHEIGHT);
 }

@@ -44,7 +44,7 @@ int	f_y;
 int 	f_w;
 int	f_h;
 int 	lightlev; 		// used for funky strobing effect
-byte*	fb; 			// pseudo-frame buffer
+colormapindex_t*	fb; // pseudo-frame buffer
 int 	amclock;
 mpoint_t m_paninc; // how far the window pans each tic (map coords)
 fixed_t 	mtof_zoommul; // how far the window zooms in each tic (map coords)
@@ -175,9 +175,9 @@ int	laststage;
 // f_finale.vars end // 
 //  f_wipe.vars begin // 
 qboolean	go ;
-byte*	wipe_scr_start;
-byte*	wipe_scr_end;
-byte*	wipe_scr;
+colormapindex_t*	wipe_scr_start;
+colormapindex_t*	wipe_scr_end;
+colormapindex_t*	wipe_scr;
 void *g_tempPointer;
 int*	wipe_y;
 // f_wipe.vars end // 
@@ -218,7 +218,7 @@ qboolean         singledemo;            	// quit after playing a demo from cmdli
 qboolean         precache ;
 wbstartstruct_t wminfo;               	// parms for world map / intermission 
 short		consistancy[MAXPLAYERS][BACKUPTICS]; 
-byte*		savebuffer;
+colormapindex_t*		savebuffer;
 int			savebufferSize;
 int             key_right;
 int		key_left;
@@ -479,7 +479,7 @@ fixed_t		swingy;
 fixed_t		bulletslope;
 // p_pspr.vars end // 
 //  p_saveg.vars begin // 
-byte*		save_p;
+colormapindex_t*		save_p;
 // p_saveg.vars end // 
 //  p_setup.vars begin // 
 int		numvertexes;
@@ -576,7 +576,7 @@ int		scaledviewwidth;
 int		viewheight;
 int		viewwindowx;
 int		viewwindowy; 
-byte*		ylookup[MAXHEIGHT]; 
+colormapindex_t*		ylookup[MAXHEIGHT]; 
 int		columnofs[MAXWIDTH]; 
 byte		translations[3][256];	
 lighttable_t*		dc_colormap; 
@@ -780,8 +780,8 @@ int			numChannels;
 int		nextcleanup;
 // s_sound.vars end // 
 //  v_video.vars begin // 
-byte*				screens[5];	
-int				dirtybox[4]; 
+colormapindex_t*    screens[5];	
+int				    dirtybox[4]; 
 int	usegamma;
 // v_video.vars end // 
 //  wi_stuff.vars begin // 

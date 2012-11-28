@@ -87,7 +87,7 @@ void R_DrawColumn ( lighttable_t * dc_colormap,
 					byte * dc_source ) 
 { 
 	int			count; 
-	byte*		dest; 
+	colormapindex_t*    dest; 
 	fixed_t		frac;
 	fixed_t		fracstep;	 
 
@@ -259,7 +259,7 @@ void R_DrawFuzzColumn ( lighttable_t * dc_colormap,
 						  byte * dc_source ) 
 { 
 	int			count; 
-	byte*		dest; 
+	colormapindex_t*    dest; 
 	fixed_t		frac;
 	fixed_t		fracstep;	 
 
@@ -358,7 +358,7 @@ void R_DrawTranslatedColumn ( lighttable_t * dc_colormap,
 						  byte * dc_source ) 
 { 
 	int			count; 
-	byte*		dest; 
+	colormapindex_t*    dest; 
 	fixed_t		frac;
 	fixed_t		fracstep;	 
 
@@ -490,7 +490,7 @@ void R_DrawSpan ( fixed_t xfrac,
 		  lighttable_t * ds_colormap,
 		  byte * ds_source ) 
 { 
-	byte*	dest; 
+	colormapindex_t*    dest; 
 	int	count;
 	int	spot; 
 
@@ -705,7 +705,7 @@ R_InitBuffer
 void R_FillBackScreen (void) 
 { 
 	byte*		src;
-	byte*		dest; 
+	colormapindex_t*    dest; 
 	int			x;
 	int			y; 
 	int			width, height, windowx, windowy;
@@ -729,17 +729,22 @@ void R_FillBackScreen (void)
 	src = (byte*)W_CacheLumpName (name, PU_CACHE_SHARED); 
 	dest = ::g->screens[1]; 
 
-	for (y=0 ; y<SCREENHEIGHT-SBARHEIGHT ; y++) { 
-		for (x=0 ; x<SCREENWIDTH/64 ; x++) 	{ 
-			memcpy(dest, src+((y&63)<<6), 64); 
-			dest += 64; 
-		} 
-		if (SCREENWIDTH&63) 
-		{ 
-			memcpy(dest, src+((y&63)<<6), SCREENWIDTH&63); 
-			dest += (SCREENWIDTH&63); 
-		} 
-	} 
+	for (y=0 ; y<SCREENHEIGHT-SBARHEIGHT ; y++) {
+#if 0
+        for (x=0 ; x<SCREENWIDTH/64 ; x++) {
+			memcpy(dest, src+((y&63)<<6), 64);
+			dest += 64;
+		}
+        if (SCREENWIDTH&63)
+		{
+			memcpy(dest, src+((y&63)<<6), SCREENWIDTH&63);
+			dest += (SCREENWIDTH&63);
+		}
+#else
+        for (x=0 ; x<SCREENWIDTH ; x++)
+            *dest++ = (colormapindex_t) (src+((y&63)<<6))[x];
+#endif
+	}
 
 	width = ::g->scaledviewwidth / GLOBAL_IMAGE_SCALER;
 	height = ::g->viewheight / GLOBAL_IMAGE_SCALER;
@@ -781,14 +786,14 @@ void
 R_VideoErase
 ( unsigned	ofs,
  int		count ) 
-{ 
+{
 	// LFB copy.
 	// This might not be a good idea if memcpy
 	//  is not optiomal, e.g. byte by byte on
 	//  a 32bit CPU, as GNU GCC/Linux libc did
 	//  at one point.
 	memcpy(::g->screens[0]+ofs, ::g->screens[1]+ofs, count); 
-} 
+}
 
 
 //
