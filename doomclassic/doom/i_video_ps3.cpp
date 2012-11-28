@@ -178,9 +178,9 @@ void I_SetPalette (byte* palette)
 	    {
 		    int r,b,g;
 
-		    r = *palette++;
-		    g = *palette++;
-		    b = *palette++;
+		    r = palette[i*3+0];
+		    g = palette[i*3+1];
+		    b = palette[i*3+2];
 
             // Darken the color to black according to light level (0-31) where 0 is full bright and 31 is full dark:
             r = gammatable[::g->usegamma][(r * scale) / 256];
