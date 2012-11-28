@@ -481,18 +481,18 @@ void R_InitTranslationTables (void)
 //
 // Draws the actual span.
 void R_DrawSpan ( fixed_t xfrac,
-				  fixed_t yfrac,
-				  fixed_t ds_y,
-				  int ds_x1,
-				  int ds_x2,
-				  fixed_t ds_xstep,
-				  fixed_t ds_ystep,
-				  lighttable_t * ds_colormap,
-				  byte * ds_source ) 
+		  fixed_t yfrac,
+		  fixed_t ds_y,
+		  int ds_x1,
+		  int ds_x2,
+		  fixed_t ds_xstep,
+		  fixed_t ds_ystep,
+		  lighttable_t * ds_colormap,
+		  byte * ds_source ) 
 { 
-	byte*		dest; 
-	int			count;
-	int			spot; 
+	byte*	dest; 
+	int	count;
+	int	spot; 
 
 #ifdef RANGECHECK
 	if (::g->ds_x2 < ::g->ds_x1
@@ -511,11 +511,13 @@ void R_DrawSpan ( fixed_t xfrac,
 	// We do not check for zero spans here?
 	count = ds_x2 - g->ds_x1; 
 
+	/*
 	if ( ds_x2 < ds_x1 ) {
 		return;						// SMF - think this is the sky
 	}
+	*/
 
-	do 
+	do
 	{
 		// Current texture index in u,v.
 		spot = ((yfrac>>(16-6))&(63*64)) + ((xfrac>>16)&63);
@@ -528,7 +530,7 @@ void R_DrawSpan ( fixed_t xfrac,
 		xfrac += ds_xstep; 
 		yfrac += ds_ystep;
 
-	} while (count--); 
+	} while (count--);
 } 
 
 
