@@ -725,17 +725,11 @@ void idCommonLocal::RunDoomClassicFrame() {
 				const int doomScreenPixelIndex = row * DOOMCLASSIC_RENDERWIDTH + column;
 				const colormapindex_t paletteIndex = data->screens[0][doomScreenPixelIndex];
 
-                const unsigned int paletteColor = data->XColorMap[paletteIndex & 255];
-                const unsigned int darkening = paletteIndex >> 8;
+                const unsigned int paletteColor = data->XColorMap[paletteIndex];
 
 				byte red = (paletteColor & 0xFF000000) >> 24;
 				byte green = (paletteColor & 0x00FF0000) >> 16;
 				byte blue = (paletteColor & 0x0000FF00) >> 8;
-
-                // Darken the color to black according to light level (0-31) where 0 is full bright and 31 is full dark:
-                red = (red * (256 - 8 * darkening)) / 256;
-                green = (green * (256 - 8 * darkening)) / 256;
-                blue = (blue * (256 - 8 * darkening)) / 256;
 
 				const int imageDataPixelIndex = row * DOOMCLASSIC_RENDERWIDTH * DOOMCLASSIC_BYTES_PER_PIXEL + column * DOOMCLASSIC_BYTES_PER_PIXEL;
 				doomClassicImageData[imageDataPixelIndex]		= red;

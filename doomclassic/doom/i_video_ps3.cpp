@@ -165,19 +165,31 @@ inline unsigned int I_PackColor( unsigned int a, unsigned int r, unsigned int g,
 //
 void I_SetPalette (byte* palette)
 {
-
 	int i;
+    int scale;
 
-	// set the X colormap entries
-	for (i=0 ; i<256 ; i++)
-	{
-		int r,b,g;
-		r = gammatable[::g->usegamma][*palette++];
-		g = gammatable[::g->usegamma][*palette++];
-		b = gammatable[::g->usegamma][*palette++];
-		::g->XColorMap[i] = I_PackColor(0xff, r, g, b);
-	}
+    for (int c = 0; c < NUMCOLORMAPS; ++c)
+    {
+        // Find the darkening scale for this colormap:
+        scale = (256 - 8 * c);
 
+	    // set the X colormap entries
+	    for (i = 0; i < 256; ++i)
+	    {
+		    int r,b,g;
+
+		    r = *palette++;
+		    g = *palette++;
+		    b = *palette++;
+
+            // Darken the color to black according to light level (0-31) where 0 is full bright and 31 is full dark:
+            r = gammatable[::g->usegamma][(r * scale) / 256];
+            g = gammatable[::g->usegamma][(g * scale) / 256];
+            b = gammatable[::g->usegamma][(b * scale) / 256];
+
+		    ::g->XColorMap[c * 256 + i] = I_PackColor(0xff, r, g, b);
+	    }
+    }
 }
 
 void I_InitGraphics()
